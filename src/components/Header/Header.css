@@ -1,0 +1,6 @@
+header {
+  border: 1px solid var(--brown);
+  background-color: var(--light-brown);
+  color: var(--brown);
+  text-align: center;
+}
