@@ -1,18 +1,20 @@
 import React from 'react';
 import './TimerDisplay.css';
+import TimeFormat from '../TimeFormat';
 
 const TimerDisplay = (props) => {
-    return (
-<div>
-<div>Display time</div>
-<div><span>Hours</span>:<span>Minutes</span>:<span>Seconds</span></div>
-<div className="display">
-  <span>{ props.numberOfHours }</span>
-  :<span>{ props.numberOfMinutes }</span>
-  :<span>{ props.numberOfSeconds }</span>
-</div>
-</div>
-    )
+  const displayTime = props.displayTime;
+  return (
+    <div>
+      <div>Display time</div>
+      <div><span>Hours</span>:<span>Minutes</span>:<span>Seconds</span></div>
+      <div className="display">
+        <TimeFormat time={ displayTime.numberOfHours } />
+        :<TimeFormat time={ displayTime.numberOfMinutes } />
+        :<TimeFormat time={ displayTime.numberOfSeconds } />
+      </div>
+    </div>
+  )
 }
 
 export default TimerDisplay;

@@ -6,64 +6,27 @@ import TimerDisplay from '../TimerDisplay';
 import TimerFrequents from '../TimerFrequents';
 
 class Timer extends Component {
+  constructor(props) {
+    super(props);
+    const stored = localStorage.getItem('frequentSettings');
+    if (stored) {
+      this.state.frequentSettings = JSON.parse(stored);
+    }
+  }
+
   state = {
     setTime: {
       numberOfHours: 0,
       numberOfMinutes: 0,
       numberOfSeconds: 0,
     },
-
     displayTime: {
       numberOfHours: 0,
       numberOfMinutes: 0,
       numberOfSeconds: 0,
     },
     timerIsRunning: false,
-    frequentSettings: [
-      {
-        id: 1,
-        frequency: 3,
-        numberOfHours: 0,
-        numberOfMinutes: 5,
-        numberOfSeconds: 0
-      },
-      {
-        id: 4,
-        frequency: 1,
-        numberOfHours: 0,
-        numberOfMinutes: 5,
-        numberOfSeconds: 2
-      },
-      {
-        id: 3,
-        frequency: 2,
-        numberOfHours: 0,
-        numberOfMinutes: 0,
-        numberOfSeconds: 1
-      },
-      {
-        id: 2,
-        frequency: 1,
-        numberOfHours: 0,
-        numberOfMinutes: 0,
-        numberOfSeconds: 4
-      },
-      {
-        id: 5,
-        frequency: 1,
-        numberOfHours: 0,
-        numberOfMinutes: 3,
-        numberOfSeconds: 2
-      }
-    ]
-  }
-
-  formatTime = (time) => {
-    if (time < 10) {
-      return `0${time}`
-    } else {
-      return `${time}`
-    }
+    frequentSettings: []
   }
 
   onSetTimerChange = (e) => {
@@ -86,23 +49,8 @@ class Timer extends Component {
       setTime: {
         ...this.state.setTime,
         [numberOf]: parseInt(e.target.value, 10)}})
-
-    if (!this.state.timerIsRunning) {
-      this.displayToCurrentSetting();
-    }
   }
-  
-  displayToCurrentSetting() {
-    this.setState({
-      displayTime: {
-        ...this.state.displayTime,
-        numberOfSeconds: this.state.setTime.numberOfSeconds,
-        numberOfMinutes: this.state.setTime.numberOfMinutes,
-        numberOfHours: this.state.setTime.numberOfHours,
-      }
-    });
-  }
-
+      
   runTimer = () => {
     console.log('timer started');
     let seconds = this.state.setTime.numberOfSeconds;
@@ -114,7 +62,6 @@ class Timer extends Component {
     }
 
     this.updateFrequentSettings();
-    this.displayToCurrentSetting();
 
     this.timeInterval = setInterval(() => {
       if (seconds !== 0 || minutes !== 0 || hours !== 0 ) {
@@ -158,7 +105,6 @@ class Timer extends Component {
   stoptimer = () => {
     clearInterval(this.timeInterval);
     this.setState({ timerIsRunning: false });
-    // console.log(this.state.timerIsRunning);
   }
 
   timeIsUp = () => {
@@ -219,10 +165,8 @@ class Timer extends Component {
         }
         newSetting.id = 5;
         primedFrequentSettings.push(newSetting);
-        console.log(primedFrequentSettings);
         newFrequentSettings = primedFrequentSettings;
       }
-      // console.log(newFrequentSettings);
     }
     this.setState({frequentSettings: newFrequentSettings})
     localStorage.setItem("frequentSettings", JSON.stringify(newFrequentSettings));    
@@ -231,11 +175,11 @@ class Timer extends Component {
   render() {
     return (
       <center>
-        <TimerSet setTimerElement={this.onSetTimerChange.bind(this)}/>
-        <TimerDisplay 
-          numberOfHours={this.formatTime(this.state.displayTime.numberOfHours)}
-          numberOfMinutes={this.formatTime(this.state.displayTime.numberOfMinutes)}
-          numberOfSeconds={this.formatTime(this.state.displayTime.numberOfSeconds)}
+        <TimerSet
+          setTimerElement={this.onSetTimerChange.bind(this)}
+        />
+        <TimerDisplay
+          displayTime={ this.state.displayTime } 
         />
         <div>
           <div>Controls</div>
@@ -245,7 +189,9 @@ class Timer extends Component {
           <button>Continue</button>
           <button>Reset</button>
         </div>
-        <TimerFrequents frequentSettings={this.state.frequentSettings} />
+        <TimerFrequents
+          frequentSettings={ this.state.frequentSettings }
+        />
       </center>
     );
   }
