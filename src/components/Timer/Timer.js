@@ -19,13 +19,43 @@ class Timer extends Component {
       numberOfSeconds: 0,
     },
     timerIsRunning: false,
-    frequentSettings: [{
-      id: 1,
-      frequency: 1,
-      numberOfHours: 0,
-      numberOfMinutes: 5,
-      numberOfSeconds: 0
-    }]
+    frequentSettings: [
+      {
+        id: 1,
+        frequency: 3,
+        numberOfHours: 0,
+        numberOfMinutes: 5,
+        numberOfSeconds: 0
+      },
+      {
+        id: 4,
+        frequency: 1,
+        numberOfHours: 0,
+        numberOfMinutes: 5,
+        numberOfSeconds: 2
+      },
+      {
+        id: 3,
+        frequency: 2,
+        numberOfHours: 0,
+        numberOfMinutes: 0,
+        numberOfSeconds: 1
+      },
+      {
+        id: 2,
+        frequency: 1,
+        numberOfHours: 0,
+        numberOfMinutes: 0,
+        numberOfSeconds: 4
+      },
+      {
+        id: 5,
+        frequency: 1,
+        numberOfHours: 0,
+        numberOfMinutes: 3,
+        numberOfSeconds: 2
+      }
+    ]
   }
 
   formatTime = (time) => {
@@ -139,33 +169,63 @@ class Timer extends Component {
   }
   
   updateFrequentSettings = () => {
-    let newFrequentSettings = this.state.frequentSettings;
+    let newFrequentSettings = [];
+    this.state.frequentSettings.forEach((setting) => {
+      newFrequentSettings.push(setting);
+    });
+
     let newSetting = {
       id: null,
-      frequency: 0,
+      frequency: 1,
       numberOfHours: this.state.setTime.numberOfHours,
       numberOfMinutes: this.state.setTime.numberOfMinutes,
       numberOfSeconds: this.state.setTime.numberOfSeconds
     }
-  
-    // console.log(newFrequentSettings);
-    // console.log(newSetting);
 
-    newFrequentSettings.map((setting, i) => {
+    let matched = false;
+
+    newFrequentSettings.forEach((setting, i) => {
       if ((setting.numberOfHours === newSetting.numberOfHours) && (setting.numberOfMinutes === newSetting.numberOfMinutes) && (setting.numberOfSeconds === newSetting.numberOfSeconds)) {
-        // console.log(newSetting);
         setting.frequency++;
-        return true;
-      } else {
-        if (newFrequentSettings.length < 5) {
-          newSetting.id = newFrequentSettings.length + 1;
-        }
+        matched = true;
+      } 
+    });
+
+    if (!matched) {
+      if (newFrequentSettings.length < 5) {
+        newSetting.id = newFrequentSettings.length + 1;
         newFrequentSettings.push(newSetting);
-        console.log(newFrequentSettings);
-        return false;
+      } else {
+        let minFrequency;
+        for (let i = 0; i < newFrequentSettings.length; i++) {
+          if (minFrequency === undefined) {
+            minFrequency = newFrequentSettings[i].frequency;
+          } else {
+            if (newFrequentSettings[i].frequency < minFrequency) {
+              minFrequency = newFrequentSettings[i].frequency;
+            }
+          }
+        }
+        let leastFrequent = newFrequentSettings.filter(leastFrequentSettings => leastFrequentSettings.frequency === minFrequency);
+        leastFrequent.sort(function(a, b) {
+          return a.id - b.id;
+        });
+        let primedFrequentSettings = newFrequentSettings.filter((setting) => setting.id !== leastFrequent[0].id);
+        primedFrequentSettings.sort(function(a, b) {
+          return a.id - b.id;
+        });
+        for (let p = 0; p < primedFrequentSettings.length; p++) {
+          primedFrequentSettings[p].id = p + 1;
+        }
+        newSetting.id = 5;
+        primedFrequentSettings.push(newSetting);
+        console.log(primedFrequentSettings);
+        newFrequentSettings = primedFrequentSettings;
       }
-    })
-    // this.setState({frequentSettings: newFrequentSettings})
+      // console.log(newFrequentSettings);
+    }
+    this.setState({frequentSettings: newFrequentSettings})
+    localStorage.setItem("frequentSettings", JSON.stringify(newFrequentSettings));    
   }
 
   render() {
