@@ -172,6 +172,17 @@ class Timer extends Component {
     localStorage.setItem("frequentSettings", JSON.stringify(newFrequentSettings));    
   }
 
+  clickFrequentSetting = (e) => {
+    const frequentSettingData = JSON.parse(e.target.getAttribute("setting-data"));
+    console.log(frequentSettingData);
+    this.setState({
+      setTime: {
+        ...this.state.setTime,
+        numberOfHours: frequentSettingData.numberOfHours,
+        numberOfMinutes: frequentSettingData.numberOfMinutes,
+        numberOfSeconds: frequentSettingData.numberOfSeconds}})
+  }
+
   render() {
     return (
       <center>
@@ -181,7 +192,7 @@ class Timer extends Component {
         <TimerDisplay
           displayTime={ this.state.displayTime } 
         />
-        <div>
+        <div className="controls">
           <div>Controls</div>
           <button onClick={this.runTimer}>Start</button>
           <button onClick={this.stoptimer}>Stop</button>
@@ -189,8 +200,10 @@ class Timer extends Component {
           <button>Continue</button>
           <button>Reset</button>
         </div>
+        <hr />
         <TimerFrequents
           frequentSettings={ this.state.frequentSettings }
+          clickFrequentSetting={ this.clickFrequentSetting }
         />
       </center>
     );

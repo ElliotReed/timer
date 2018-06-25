@@ -6,8 +6,6 @@ const TimerDisplay = (props) => {
   const displayTime = props.displayTime;
   return (
     <div>
-      <div>Display time</div>
-      <div><span>Hours</span>:<span>Minutes</span>:<span>Seconds</span></div>
       <div className="display">
         <TimeFormat time={ displayTime.numberOfHours } />
         :<TimeFormat time={ displayTime.numberOfMinutes } />

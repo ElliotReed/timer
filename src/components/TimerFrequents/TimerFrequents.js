@@ -5,11 +5,14 @@ import TimeFormat from '../TimeFormat';
 const TimerFrequents = (props) => {
   const settings = props.frequentSettings;
   const settingItems = settings.map((setting) => 
-    <li key={setting.id}>
+    <button
+      key={ setting.id }
+      onClick={ props.clickFrequentSetting }
+      setting-data={ JSON.stringify(setting) }>
       <TimeFormat time={ setting.numberOfHours } />
       :<TimeFormat time={ setting.numberOfMinutes } />
       :<TimeFormat time={ setting.numberOfSeconds } />
-    </li>
+    </button>
   );
   return (
     <ul>{ settingItems }</ul>

@@ -20,28 +20,34 @@ class TimerSet extends Component {
   render() {
     return (
       <div>
-        <div>Set timer</div>
-          <div>
-          <label htmlFor="select-hours">Hours</label>
-          <select 
-            name="select-hours"
-            onChange={this.props.setTimerElement}>
-              {  this.state.setTimeOptions.numberOfHours.map((number) =>
-              <option key={number}>{number}</option>
-              )}
-          </select>
+        <h2>Set timer</h2>
+          <div className="element-container">
+          <div className="display-element">
+            <label htmlFor="select-hours">Hours</label>
+            <select 
+              name="select-hours"
+              onChange={this.props.setTimerElement}>
+                {  this.state.setTimeOptions.numberOfHours.map((number) =>
+                <option key={number}>{number}</option>
+                )}
+            </select>
+          </div>
+          <div className="display-element">
           <label htmlFor="select-minutes">Minutes</label>
           <select name="select-minutes" onChange={this.props.setTimerElement}>
             {  this.state.setTimeOptions.numberOfMinutes.map((number) =>
               <option key={number}>{number}</option>
             )}
           </select>
+          </div>
+          <div className="display-element">
           <label htmlFor="select-seconds">Seconds</label>
           <select name="select-seconds" onChange={this.props.setTimerElement}>
             {  this.state.setTimeOptions.numberOfSeconds.map((number) =>
               <option key={number}>{number}</option>
             )}
           </select>
+          </div>
         </div>
       </div>
     )
