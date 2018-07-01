@@ -15,7 +15,7 @@ const TimerFrequents = (props) => {
     </button>
   );
   return (
-    <ul>{ settingItems }</ul>
+    <div className="frequentSetting__buttons">{ settingItems }</div>
   )
 }
 

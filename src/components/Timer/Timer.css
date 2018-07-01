@@ -6,12 +6,16 @@ button {
   border-radius: 5em;
   background-color: transparent;
   color: white;
-  font-size: 1em;
+  font-size: .75rem;
 }
 
 button:hover {
   cursor: pointer;
   background-color: var(--blue);
+}
+
+button:focus, button:active {
+  outline: 0;
 }
 
 hr {

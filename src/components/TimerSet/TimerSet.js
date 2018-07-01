@@ -20,7 +20,6 @@ class TimerSet extends Component {
   render() {
     return (
       <div>
-        <h2>Set timer</h2>
           <div className="element-container">
           <div className="display-element">
             <label htmlFor="select-hours">Hours</label>

@@ -1,3 +1,13 @@
-ul {
-  list-style-type: none;
+.frequentSetting__buttons {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center
+}
+.frequentSetting__buttons button {
+  width: 5em;
+  height: 5em;
+  margin: .5em; 
+  font-size: .7rem;
+  padding: 0;
 }

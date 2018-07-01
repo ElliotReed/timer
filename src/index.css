@@ -1,18 +1,22 @@
 :root {
   --fontStack: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
   /* #region colors */
-  --blue: rgb(147, 211, 236);
+  --blue: rgb(131, 205, 235);
   --brown: rgb(144, 110, 16);
   --light-brown: rgba(144, 110, 16, 0.246);
   /* #endregion colors */
 }
 
+html {
+  font-size: 100%;
+}
+
 body {
   width:100%;
-  height: 100vh;
+  height: 100%;
   margin: 0;
   padding: 0;
-  background: radial-gradient(circle, rgba(147, 211, 236, 0.527),var(--blue));
+  background: radial-gradient(circle, rgba(131, 205, 235, 0.527),var(--blue));
   color: white;
   font-family: var(--fontStack);
 }

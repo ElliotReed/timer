@@ -5,10 +5,10 @@ import Timer from './components/Timer';
 class App extends Component {
   render() {
     return (
-      <div>
+      <center>
         <Header />
         <Timer />
-      </div>
+      </center>
     );
   }
 }
