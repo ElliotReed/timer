@@ -6,6 +6,7 @@ import soundFile from '../../assets/sound/alarm.mp3';
 import TimerSet from '../TimerSet';
 import TimerDisplay from '../TimerDisplay';
 import TimerFrequents from '../TimerFrequents';
+import { isEqual } from 'lodash';
 
 class Timer extends Component {
   constructor(props) {
@@ -22,7 +23,8 @@ class Timer extends Component {
         numberOfSeconds: 0,
       },
       timerIsRunning: false,
-      progress: 0
+      timerHasRun: false,
+      progress: 100
     }
 
     const stored = localStorage.getItem('frequentSettings');
@@ -51,8 +53,26 @@ class Timer extends Component {
       setTime: {
         ...this.state.setTime,
         [numberOf]: parseInt(e.target.value, 10)
+      },
+      timerHasRun: false
+    });
+  }
+  
+  componentDidUpdate() {
+    let setTime = this.state.setTime;
+    let displayTime = this.state.displayTime;
+    if (!this.state.timerHasRun) {
+      if ((!isEqual(setTime, displayTime)) && (!this.state.timerIsRunning)) {
+        this.setState({
+          displayTime: {
+            ...this.state.displayTime,
+            numberOfHours: setTime.numberOfHours,
+            numberOfMinutes: setTime.numberOfMinutes,
+            numberOfSeconds: setTime.numberOfSeconds
+          }
+        })
       }
-    })
+    }
   }
 
   convertHMSToMilliseconds = (hours, minutes, seconds) => {
@@ -83,6 +103,8 @@ class Timer extends Component {
     this.setState({ timerIsRunning: true });
     // valid setting, update frequent settings
     this.updateFrequentSettings();
+    // initialize progress
+    this.setState({ progress: 100 });
     // Use date for more accutrate timing
     const interval = 1000; // ms
     let expected = Date.now() + interval;
@@ -103,6 +125,7 @@ class Timer extends Component {
         expected += interval;
         timeout = setTimeout(step, Math.max(0, interval - dt)); // take into account drift
       } else {
+        this.setState({ timerHasRun: true });
         this.setState({ timerIsRunning: false });
         clearTimeout(timeout);
         this.timeIsUp();
@@ -112,7 +135,7 @@ class Timer extends Component {
   }
 
   setProgress = (originalTime, time) => {
-    this.setState({ progress: ((originalTime - time)/originalTime) * 100 });
+    this.setState({ progress: ((time)/originalTime) * 100 });
   }
   
   displayOut = (time) => {
@@ -128,8 +151,7 @@ class Timer extends Component {
   }
 
   stoptimer = () => {
-    clearTimeout(this.atimeInterval);
-    clearInterval(this.timeInterval);
+    clearTimeout(this.timeout);
     this.setState({
       timerIsRunning: false
     });
@@ -220,7 +242,7 @@ class Timer extends Component {
         <TimerSet
           setTimerElement={ this.onSetTimerChange.bind(this) } />
         <TimerDisplay
-          displayTime = { this.state.displayTime } 
+          displayTime={ this.state.displayTime } 
           progress={ this.state.progress }
           />
         <div className = "controls">

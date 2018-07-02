@@ -5,8 +5,17 @@
   z-index: -1;
   top: calc(50% - 180px);
   left: calc(50% - 180px);
-  /* height: 30vh; */
 }
+
+.progress-ring__background {
+  display: block;
+  margin: 0 auto;
+  position: absolute;
+  z-index: -2;
+  top: calc(50% - 180px);
+  left: calc(50% - 180px);
+}
+
 .progress-ring__circle {
   transition: stroke-dashoffset 0.35s;
   transform: rotate(-90deg);
