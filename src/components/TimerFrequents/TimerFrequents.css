@@ -11,3 +11,14 @@
   font-size: .7rem;
   padding: 0;
 }
+@media screen and (max-height: 632px) {
+  .frequentSetting__buttons {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 480px) {
+  .frequentSetting__buttons button {
+    font-size: 1rem;
+  }
+}

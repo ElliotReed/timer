@@ -21,3 +21,9 @@
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
 }
+
+@media screen and (max-width: 359px) {
+  .progress-ring, .progress-ring__background, .progress-ring__circle {
+    display: none;
+  }
+}

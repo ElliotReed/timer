@@ -24,7 +24,9 @@ class Timer extends Component {
       },
       timerIsRunning: false,
       timerHasRun: false,
-      progress: 100
+      progress: 100,
+      isPaused: false,
+      shouldClearTimeout: false
     }
 
     const stored = localStorage.getItem('frequentSettings');
@@ -90,50 +92,7 @@ class Timer extends Component {
     timeObj.seconds = Math.floor((time % (1000 * 60)) / 1000);
     return timeObj;
   }
-
-  runTimer = () => {
-    // get the current setting
-    const setTime = this.state.setTime;
-    let time = this.convertHMSToMilliseconds(setTime.numberOfHours, setTime.numberOfMinutes, setTime.numberOfSeconds );
-    const originalTime = time;
-    // test for no setting
-    if (time === 0) {
-      return;
-    }
-    this.setState({ timerIsRunning: true });
-    // valid setting, update frequent settings
-    this.updateFrequentSettings();
-    // initialize progress
-    this.setState({ progress: 100 });
-    // Use date for more accutrate timing
-    const interval = 1000; // ms
-    let expected = Date.now() + interval;
-    let step;
-    // let displayOut = this.displayOut;
-    let timeout;
-    step = () => {
-      if (time !== 0) {
-        var dt = Date.now() - expected; // the drift (positive for overshooting)
-        if (dt > interval) {
-          // something really bad happened. Maybe the browser (tab) was inactive?
-          // possibly special handling to avoid futile "catch up" run
-        }
-        // … // do what is to be done
-        time -= interval
-        this.displayOut(time);
-        this.setProgress(originalTime, time);
-        expected += interval;
-        timeout = setTimeout(step, Math.max(0, interval - dt)); // take into account drift
-      } else {
-        this.setState({ timerHasRun: true });
-        this.setState({ timerIsRunning: false });
-        clearTimeout(timeout);
-        this.timeIsUp();
-      }
-    }
-    setTimeout(step, interval);
-  }
-
+  
   setProgress = (originalTime, time) => {
     this.setState({ progress: ((time)/originalTime) * 100 });
   }
@@ -149,11 +108,83 @@ class Timer extends Component {
       }
     })
   }
+  
+  startPauseClickHandler = () => {
+    if (this.state.timerIsRunning) {
+      if (this.state.isPaused) {
+        this.setState({ isPaused: false });
+      } else {
+        this.setState({ isPaused: true });
+      }
+    } else {
+      this.runTimer();
+    }
+  }
+  
+  runTimer = () => {
+    // get the current setting
+    const setTime = this.state.setTime;
+    let time = this.convertHMSToMilliseconds(setTime.numberOfHours, setTime.numberOfMinutes, setTime.numberOfSeconds );
+    const originalTime = time;
+    // test for no setting
+    if (time === 0) {
+      return;
+    }
+    // valid setting, update frequent settings
+    this.updateFrequentSettings();
+    // initialize progress
+    this.setState({ 
+      timerIsRunning: true, 
+      isPaused: false,
+      progress: 100
+    });
+    // Use date for more accutrate timing
+    const interval = 1000; // ms
+    let expected = Date.now() + interval;
+    let step;
+    let timeout;
+
+    step = () => {
+      if (time !== 0) {
+        var dt = Date.now() - expected; // the drift (positive for overshooting)
+        if (dt > interval) {
+          // something really bad happened. Maybe the browser (tab) was inactive?
+          // possibly special handling to avoid futile "catch up" run
+        }
+        // do what is to be done
+        if (!this.state.isPaused && !this.state.shouldClearTimeout) {
+          time -= interval
+          this.displayOut(time);
+          this.setProgress(originalTime, time);
+        }
+
+        if (this.state.shouldClearTimeout) {
+          clearTimeout(timeout);
+          this.setState({ 
+            progress: 100,
+            shouldClearTimeout: false });
+        } else {
+            expected += interval;
+            timeout = setTimeout(step, Math.max(0, interval - dt)); // take into account drift
+        }
+
+      } else {
+          this.setState({ 
+            timerHasRun: true,
+            timerIsRunning: false,
+            isPaused: false
+          });
+          clearTimeout(timeout);
+          this.timeIsUp();
+      }
+    }
+    setTimeout(step, interval);
+  }
 
   stoptimer = () => {
-    clearTimeout(this.timeout);
     this.setState({
-      timerIsRunning: false
+      timerIsRunning: false,
+      shouldClearTimeout: true
     });
   }
 
@@ -236,6 +267,7 @@ class Timer extends Component {
     })
   }
 
+
   render() {
     return ( 
       <div>
@@ -246,7 +278,9 @@ class Timer extends Component {
           progress={ this.state.progress }
           />
         <div className = "controls">
-          <button onClick={ this.runTimer }>Start</button>
+          <button onClick={ this.startPauseClickHandler }>{ (!this.state.timerIsRunning) ?
+            "Start" : (this.state.isPaused) ? "Resume" : "Pause" }
+          </button> 
           <button onClick={ this.stoptimer }>Stop</button>
         </div>
         <hr />
