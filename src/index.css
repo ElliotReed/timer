@@ -16,5 +16,6 @@ body {
   padding: 0;
   background: radial-gradient(circle, rgba(131, 205, 235, 0.527),var(--blue));
   color: white;
-  font-family: var(--fontStack);
+  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+  /* font-family: var(--fontStack); */
 }
