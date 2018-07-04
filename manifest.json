@@ -1,6 +1,6 @@
 {
-  "short_name": "Timer App",
-  "name": "Timer App",
+  "short_name": "Timer",
+  "name": "Timer",
   "icons": [
     {
       "src": "favicon.png",
@@ -10,6 +10,6 @@
   ],
   "start_url": "./index.html",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "rgb(131, 205, 235)",
+  "background_color": "rgb(131, 205, 235)"
 }
