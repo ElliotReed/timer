@@ -13,7 +13,6 @@
 }
 
 .display-element select {
-  /* width: 30%; */
   border: .15em solid var(--blue);
   border-radius: .5em;
   background: var(--blue);

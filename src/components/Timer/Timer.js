@@ -26,7 +26,8 @@ class Timer extends Component {
       timerHasRun: false,
       progress: 100,
       isPaused: false,
-      shouldClearTimeout: false
+      shouldClearTimeout: false,
+      frequentSettings: []
     }
 
     const stored = localStorage.getItem('frequentSettings');
