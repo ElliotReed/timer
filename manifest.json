@@ -10,6 +10,6 @@
   ],
   "start_url": "./index.html",
   "display": "standalone",
-  "theme_color": "rgb(131, 205, 235)",
-  "background_color": "rgb(131, 205, 235)"
+  "theme_color": "#83cdeb",
+  "background_color": "#83cdeb"
 }
