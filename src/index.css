@@ -1,20 +1,36 @@
 :root {
   --fontStack: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
   /* #region colors */
-  --blue: rgb(131, 205, 235);
+  --blue: #83cdeb;
   /* #endregion colors */
 }
 
 html {
-  font-size: 100%;
+  font-size: 16px;
 }
 
+/* tablet */
+@media only screen and (min-width: 768px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+/* desktop */
+@media only screen and (min-width: 1080px) {
+  html {
+    font-size: 22px;
+  }
+}
+
+/* #endregion */
+
 body {
-  width:100%;
+  width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
-  background: radial-gradient(circle, rgba(131, 205, 235, 0.527),var(--blue));
+  background: radial-gradient(circle, rgba(131, 205, 235, 0.527), var(--blue));
   color: white;
   font-family: var(--fontStack);
 }

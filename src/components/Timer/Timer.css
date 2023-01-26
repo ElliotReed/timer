@@ -1,41 +1,55 @@
-button {
-  width: 5em;
-  height: 5em;
-  margin: 1em; 
-  border: .2em solid white;
-  border-radius: 5em;
-  background-color: transparent;
-  color: white;
-  font-size: .75rem;
+.controls {
+	display: flex;
+	justify-content: center;
 }
+
+button {
+	width: 5em;
+	height: 5em;
+	margin: 1em;
+	border: 0.2em solid white;
+	border-radius: 5em;
+	background-color: transparent;
+	color: white;
+	font-size: 0.75rem;
+}
+
 @media screen and (min-width: 411px) {
-  button {
-    font-size: 1rem;
-  }
+	button {
+		font-size: 1rem;
+	}
 }
 
 button:hover {
-  cursor: pointer;
-  background-color: var(--blue);
+	cursor: pointer;
+	background-color: var(--blue);
 }
 
-button:focus, button:active {
-  outline: 0;
+button:focus,
+button:active {
+	outline: 0;
 }
 
 hr {
-  border: 0;
-  height: 1px;
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+	border: 0;
+	height: 1px;
+	background-image: linear-gradient(
+		to right,
+		rgba(255, 255, 255, 0),
+		rgba(255, 255, 255, 0.75),
+		rgba(255, 255, 255, 0)
+	);
 }
+
 @media screen and (max-height: 632px) {
-  hr {
-    display: none;
-  }
+	hr {
+		display: none;
+	}
 }
+
 @media screen and (min-height: 664px) {
-  hr {
-    margin:1em auto;
-    height: 2px;
-  }
+	hr {
+		margin: 1em auto;
+		height: 2px;
+	}
 }

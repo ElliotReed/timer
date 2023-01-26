@@ -12,8 +12,8 @@
   left: calc(50% - 8rem);
   border: none;
   text-align: center;
+  font-size: 64px;
   line-height: 4rem;
-  font-size: 4rem;
 }
 
 @media screen and (min-width: 600px) {

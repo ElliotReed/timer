@@ -1,0 +1,13 @@
+{
+  "workbench.colorCustomizations": {
+    "statusBar.foreground": "#ffffff",
+    "statusBar.background": "#232628",
+    "statusBarItem.remoteBackground": "#83cdeb",
+    "statusBarItem.remoteForeground": "#ffffff",
+    "titleBar.activeForeground": "#ffffff",
+    "titleBar.activeBackground": "#83cdeb",
+    "titleBar.inactiveForeground": "#dedede",
+    "titleBar.inactiveBackground": "#a3d3e6",
+  },
+  "workbench.colorTheme": "Blueberry dark theme"
+}
