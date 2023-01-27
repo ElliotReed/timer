@@ -3,12 +3,22 @@
   "name": "Timer",
   "icons": [
     {
-      "src": "favicon.png",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "./icon-192.png",
+      "type": "image/png",
+      "sizes": "57x57"
+    },
+    {
+      "src": "./icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "./icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
-  "start_url": "./index.html",
+  "start_url": "https://elliotreed.github.io/Timer/",
   "display": "standalone",
   "theme_color": "#83cdeb",
   "background_color": "#83cdeb"
