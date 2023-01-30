@@ -18,7 +18,7 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "https://elliotreed.github.io/Timer/",
+  "start_url": "https://elliotreed.github.io/timer/",
   "display": "standalone",
   "theme_color": "#83cdeb",
   "background_color": "#83cdeb"
