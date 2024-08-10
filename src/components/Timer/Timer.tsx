@@ -53,8 +53,10 @@ class Timer extends Component {
 
 	stored: string | null = localStorage.getItem('frequentSettings');
 
-	if(stored: string) {
-		this.state.frequentSettings = JSON.parse(stored);
+	setFrequentSettingsFromLocalStorage() {
+		if (this.stored) {
+			this.setState({frequentSettings: JSON.parse(this.stored)});
+		}
 	}
 
 	onSetTimerChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -290,6 +292,10 @@ class Timer extends Component {
 			this.resetDisplay
 		);
 	};
+
+	componentDidMount(): void {
+		this.setFrequentSettingsFromLocalStorage()
+	}
 
 	componentDidUpdate() {
 		let setTime = this.state.setTime;
