@@ -1,6 +1,6 @@
 {
-  "short_name": "Timer",
-  "name": "Timer",
+  "display": "standalone",
+  "background_color": "#83cdeb",
   "icons": [
     {
       "src": "./icon-57.png",
@@ -18,8 +18,8 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "https://elliotreed.github.io/timer/",
-  "display": "standalone",
-  "theme_color": "#83cdeb",
-  "background_color": "#83cdeb"
+  "name": "Timer",
+  "short_name": "Timer",
+  "start_url": "/",
+  "theme_color": "#83cdeb"
 }
