@@ -4,6 +4,6 @@ import svgrPlugin from 'vite-plugin-svgr';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/timer/',
+  base: '/',
   plugins: [react(), svgrPlugin()],
 });
