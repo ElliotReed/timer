@@ -1,4 +1,4 @@
-# [React Timer](https://elliotreed.github.io/timer "React Timer")
+# [React Timer](https://er-timer.netlify.app)
 
 A timer built using React.
 
