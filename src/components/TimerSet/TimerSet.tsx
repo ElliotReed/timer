@@ -27,6 +27,11 @@ class TimerSet extends Component<Props, StateProps> {
         <div className="element-container">
           <div className="display-element">
             <label htmlFor="select-hours">Hours</label>
+            <ol className="fake-select">
+            {this.state.numberOfHours.map((number) =>
+                <li key={number}>{number}</li>
+              )}
+            </ol>
             <select
               name="select-hours"
               onChange={this.props.onChange}>
