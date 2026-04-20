@@ -55,7 +55,7 @@ class Timer extends Component {
 
 	setFrequentSettingsFromLocalStorage() {
 		if (this.stored) {
-			this.setState({frequentSettings: JSON.parse(this.stored)});
+			this.setState({ frequentSettings: JSON.parse(this.stored) });
 		}
 	}
 

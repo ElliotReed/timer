@@ -3,24 +3,8 @@
   /* #region colors */
   --blue: #33809e;
   /* #endregion colors */
-}
-
-html {
-  font-size: 16px;
-}
-
-/* tablet */
-@media only screen and (min-width: 768px) {
-  html {
-    font-size: 18px;
-  }
-}
-
-/* desktop */
-@media only screen and (min-width: 1080px) {
-  html {
-    font-size: 22px;
-  }
+  font-size: calc(15px + .390625vw);
+  line-height: 1.25;
 }
 
 /* #endregion */
@@ -30,7 +14,7 @@ body {
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  background: radial-gradient(circle at top left,#33809ecc, var(--blue)) no-repeat;
+  background: radial-gradient(circle at top left, #33809ecc, var(--blue)) no-repeat;
   color: white;
   font-family: var(--fontStack);
   overflow: hidden;

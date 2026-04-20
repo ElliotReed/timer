@@ -1,11 +1,12 @@
 {
+  "editor.fontFamily": "Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif",
   "workbench.colorCustomizations": {
     "statusBar.foreground": "#ffffff",
-    "statusBar.background": "#232628",
-    "statusBarItem.remoteBackground": "#83cdeb",
+    "statusBar.background": "#33809e",
+    "statusBarItem.remoteBackground": "#33809e",
     "statusBarItem.remoteForeground": "#ffffff",
     "titleBar.activeForeground": "#ffffff",
-    "titleBar.activeBackground": "#83cdeb",
+    "titleBar.activeBackground": "#33809e",
     "titleBar.inactiveForeground": "#dedede",
     "titleBar.inactiveBackground": "#a3d3e6",
   },
