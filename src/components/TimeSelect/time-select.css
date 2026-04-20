@@ -1,9 +1,4 @@
-.element-container {
-  display: flex;
-  justify-content: center;
-}
-
-.display-element {
+.time-select {
   position: relative;
   text-align: center;
 
